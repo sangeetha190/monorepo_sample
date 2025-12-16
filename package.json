@@ -1,0 +1,23 @@
+{
+  "name": "my-portal-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "dev:red": "pnpm -C apps/web-red dev",
+    "dev:green": "pnpm -C apps/web-green dev",
+    "dev:blue": "pnpm -C apps/web-blue dev",
+
+    "build:red": "pnpm -C apps/web-red build",
+    "build:green": "pnpm -C apps/web-green build",
+    "build:blue": "pnpm -C apps/web-blue build",
+
+    "build:all": "pnpm -r --filter ./apps/* build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.24.0"
+}
