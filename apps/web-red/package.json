@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@repo/frontend-core": "workspace:*",
+    "@repo/theme-tokens": "workspace:*",
+    "@repo/ui": "workspace:*",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@repo/frontend-core": "workspace:*",
-    "@repo/ui": "workspace:*",
-    "@repo/theme-tokens": "workspace:*"
+    "react-router-dom": "^7.11.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
