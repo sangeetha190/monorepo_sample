@@ -2,12 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- favicon -->
+    <link rel="icon" href="/red_icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>web-red</title>
+
+    <!-- PWA (only if these files exist inside apps/web-red/public/) -->
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- CSS (these must be inside apps/web-red/public/assets/css/...) -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
   </head>
+
   <body>
     <div id="root"></div>
+
+    <!-- Vite entry -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- JS (these must be inside apps/web-red/public/assets/js/...) -->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/swiper.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

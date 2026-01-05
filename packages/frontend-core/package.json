@@ -3,5 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "main": "./src/index.js"
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./bootstrap": "./src/bootstrap.js",
+    "./auth/AuthContext": "./src/auth/AuthContext.js",
+    "./auth/RouteTracker": "./src/auth/RouteTracker.jsx",
+    "./api/authAPI": "./src/api/authAPI.js",
+    "./constants": "./src/constants/index."
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "dependencies": {
+    "axios": "^1.13.2"
+  }
 }
