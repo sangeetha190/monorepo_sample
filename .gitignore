@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# pnpm
+.pnpm-store/
+**/.pnpm-store/
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# env
+.env
+.env.*
