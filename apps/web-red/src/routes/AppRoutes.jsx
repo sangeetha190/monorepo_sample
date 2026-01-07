@@ -13,7 +13,9 @@ const ForgotPassword = lazy(() => import("../pages/Auth/ForgotPassword"));
 const ForgotOTP = lazy(() => import("../pages/Auth/ForgotOTP"));
 const NewPassword = lazy(() => import("../pages/Auth/NewPassword"));
 
+const AllGamesPage = lazy(() => import("../pages/Games/AllGamesPage"));
 
+const FilteredGamesPage = lazy(() => import("../pages/Games/FilteredGamesPage"));
 
 export default function AppRoutes() {
   return (
@@ -21,6 +23,15 @@ export default function AppRoutes() {
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.about} element={<About />} />
+
+        {/* all Games */}
+        <Route path={routes.games.all} element={<AllGamesPage />} />
+        <Route path={routes.games.topGames} element={<AllGamesPage />} />
+
+        <Route
+            path={routes.games.filteredGames}
+            element={<FilteredGamesPage />}
+          />
 
         {/* Auth */}
         <Route path={routes.auth.login} element={<LoginPage />} />

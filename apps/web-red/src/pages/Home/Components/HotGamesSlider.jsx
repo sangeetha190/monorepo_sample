@@ -762,10 +762,9 @@ const LUCKY6_GAME = {
                                   top: 0,
                                   left: 0,
                                   width: "100vw",
-                                  height: "100vh",
+                                  height: "100dvh",
                                   backgroundColor: "#000",
                                   zIndex: 9999,
-                                  height: "100dvh",
                                 }}
                               >
                                 {/* Navbar only appears if iframe loaded successfully */}

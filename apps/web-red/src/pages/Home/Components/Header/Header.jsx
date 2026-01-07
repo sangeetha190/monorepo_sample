@@ -294,13 +294,13 @@ const StickyHeader = ({ onToggleSidebar }) => {
           {/* tab and laptopnav */}
           <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row mobile-none">
             <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-              <Link to={routes.home}>
-                <a className="navbar-brand brand-logo">
+              <Link to={routes.home} className="navbar-brand brand-logo">
+              
                   <img src="/assets/img/logo.png" alt="logo" />
-                </a>
-                <a className="navbar-brand brand-logo-mini p-0">
+                
+                <span className="navbar-brand brand-logo-mini p-0">
                   <img src="/assets/img/fav.png" alt="logo" />
-                </a>
+                </span>
               </Link>
             </div>
             <div className="navbar-menu-wrapper d-flex align-items-stretch">

@@ -1,54 +1,8 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import BASE_URL from "../API/api";
-import { toast } from "react-toastify";
 import { getIsMobileParam } from "./homePageApi";
-// import axios from "axios";
-// import { useQuery } from "@tanstack/react-query";
-// import BASE_URL from "../API/api";
+import BASE_URL from "../api/baseUrl";
 
-// This function runs all 3 search API calls
-// const fetchSearchGames = async (searchTerm) => {
-//   const fixedSearchTerm = searchTerm.trim();
-//   if (!fixedSearchTerm) {
-//     return { searchByName: [], searchByProvider: [] };
-//   }
-//   const isMobileParam = getIsMobileParam();
-
-//   const [res1, res2, res3] = await Promise.all([
-//     axios.get(
-//       `${BASE_URL}/all-games?is_mobile=${isMobileParam}&global=${fixedSearchTerm}`
-//     ),
-//     axios.get(
-//       `${BASE_URL}/all-games?is_mobile=${isMobileParam}&provider=${fixedSearchTerm}`
-//     ),
-//     axios.get(
-//       `${BASE_URL}/all-games?is_mobile=${isMobileParam}&type=${fixedSearchTerm}`
-//     ),
-//   ]);
-
-//   // Merge res1 + res3 results
-//   const mergedSearchResults = [
-//     ...(res1.data.allGames || []),
-//     ...(res3.data.allGames || []),
-//   ];
-
-//   // Remove duplicates by uuid
-//   const uniqueMergedResults = Array.from(
-//     new Map(mergedSearchResults.map((game) => [game.uuid, game])).values()
-//   );
-
-//   return {
-//     searchByName: uniqueMergedResults,
-//     searchByProvider: res2.data.allGames || [],
-//   };
-// };
-
-/**
- * Server-side paginated search.
- * Returns merged results from ?global and ?type (deduped by uuid)
- * + provider results (page 1 only) + totalPages from pagination.
- */
 export const fetchSearchGames = async ({ term, page = 1, limit = 30 }) => {
   const fixedSearchTerm = (term || "").trim();
   if (!fixedSearchTerm) {
@@ -61,9 +15,6 @@ export const fetchSearchGames = async ({ term, page = 1, limit = 30 }) => {
     axios.get(
       `${BASE_URL}/all-games?is_mobile=${isMobileParam}&global=${fixedSearchTerm}&page=${page}&limit=${limit}`
     ),
-    // axios.get(
-    //   `${BASE_URL}/all-games?is_mobile=${isMobileParam}&provider=${fixedSearchTerm}&page=${page}&limit=${limit}`
-    // ),
     axios.get(
       `${BASE_URL}/all-games?is_mobile=${isMobileParam}&type=${fixedSearchTerm}&page=${page}&limit=${limit}`
     ),

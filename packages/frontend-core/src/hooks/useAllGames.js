@@ -24,8 +24,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import BASE_URL from "../API/api";
 import { getIsMobileParam } from "./homePageApi";
+import BASE_URL from "../api/baseUrl";
 
 const fetchAllGames = async (page) => {
   const isMobileParam = getIsMobileParam();

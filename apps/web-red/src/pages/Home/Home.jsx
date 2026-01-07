@@ -39,6 +39,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useQuery } from "@tanstack/react-query";
 import StickyHeader from "./Components/Header/Header";
 import Sidebar from "./Components/Header/Sidebar";
+import Footer from "./Components/Footer/Footer";
+import BottomFooter from "./Components/Footer/BottomFooter";
+import BottomProvider from "./Components/Footer/BottomProvider";
 
 function Home() {
   const { isLoading } = useContext(AuthContext);
@@ -75,13 +78,13 @@ function Home() {
   // const { data: , isLoading_data } = useProviders();
   // Fetch Dice Games Effect
   const {
-    data: diceGames = [],
-    isLoadingDiceGame,
-  } = useQuery({
-    queryKey: ["diceGames"],
-    queryFn: fetchDiceGames,
-    staleTime: 5 * 60 * 1000,
-  });
+  data: diceGames = [],
+  isLoading: isLoadingDiceGame, // ✅ alias correctly
+} = useQuery({
+  queryKey: ["diceGames"],
+  queryFn: fetchDiceGames,
+  staleTime: 5 * 60 * 1000,
+});
 
   // SmartSoft games query
   const {
@@ -575,24 +578,36 @@ function Home() {
 
   // Dummy routes object - replace with your actual routes if different
   const routes = {
-    games: {
-      all: "/all-games",
-    },
-  };
+  home: "/",
+  games: { all: "/all-games" },
+};
 
   const [isLoadingTypes, setIsLoadingTypes] = useState(true);
 
   // Define your game type data.
   // This array ensures the skeleton and actual content match in structure and count.
+  // const gameTypes = [
+  //   { name: "Casino", type: "card", imgSrc: "assets/img/css.png" },
+  //   { name: "Roulette", type: "roulette", imgSrc: "assets/img/casino11.png" },
+  //   { name: "Crash", type: "crash", imgSrc: "assets/img/crash.png" },
+  //   { name: "Lottery", type: "lottery", imgSrc: "assets/img/lottery.png" },
+  //   { name: "Instant", type: "instant", imgSrc: "assets/img/sports.png" },
+  //   { name: "Slots", type: "slots", imgSrc: "assets/img/horse.png" },
+  //   { name: "Dice", type: "dice", imgSrc: "assets/img/up.png" },
+  // apps/web-red/public/assets/img/gamestypes
+  // ];
+
+    // This array ensures the skeleton and actual content match in structure and count.
   const gameTypes = [
-    { name: "Casino", type: "card", imgSrc: "assets/img/css.png" },
-    { name: "Roulette", type: "roulette", imgSrc: "assets/img/casino11.png" },
-    { name: "Crash", type: "crash", imgSrc: "assets/img/crash.png" },
-    { name: "Lottery", type: "lottery", imgSrc: "assets/img/lottery.png" },
-    { name: "Instant", type: "instant", imgSrc: "assets/img/sports.png" },
-    { name: "Slots", type: "slots", imgSrc: "assets/img/horse.png" },
-    { name: "Dice", type: "dice", imgSrc: "assets/img/up.png" },
+    { name: "Casino", type: "card", imgSrc: "assets/img/gamestypes/card.png" },
+    { name: "Roulette", type: "roulette", imgSrc: "assets/img/gamestypes/casino.png" },
+    { name: "Crash", type: "crash", imgSrc: "assets/img/gamestypes/crash.png" },
+    { name: "Lottery", type: "lottery", imgSrc: "assets/img/gamestypes/lottery.png" },
+    { name: "Instant", type: "instant", imgSrc: "assets/img/gamestypes/instant.png" },
+    { name: "Slots", type: "slots", imgSrc: "assets/img/gamestypes//slots.png" },
+    { name: "Dice", type: "dice", imgSrc: "assets/img/gamestypes//dice.png" },
   ];
+
 
   // banner section
 
@@ -624,7 +639,7 @@ function Home() {
     { type: "card", imgSrc: "assets/img/turbo/3.png" },
     { type: "dice", imgSrc: "assets/img/turbo/4.png" },
     { type: "shooting", imgSrc: "assets/img/turbo/5.png" },
-    { type: "general", imgSrc: "assets/img/turbo/6.png", linkTo: routes.home },
+    { type: "general", imgSrc: "assets/img/turbo/6.png"},
     { type: "bingo", imgSrc: "assets/img/turbo/7.png" },
     { type: "fish/shooting", imgSrc: "assets/img/turbo/8.png" },
     { type: "table", imgSrc: "assets/img/turbo/9.png" },
@@ -636,8 +651,8 @@ function Home() {
   const handleImageClick = async (term) => {
     try {
       setIsSearching(true);
-      const res = await axiosInstance.get("/all-games", {
-        params: { is_mobile: 1, search: term, page: 1 }, // Lucky 6 → term = "Lucky 6"
+     const res = await axios.get(`${BASE_URL}/all-games`, {
+       params: { is_mobile: 1, search: term, page: 1 },
       });
       const results = res?.data?.allGames || [];
 
@@ -673,12 +688,9 @@ function Home() {
   }, [navigate]);
 
   // back btn setup starts
-  const buildReturnUrl = (location) => {
-    const base = import.meta?.env?.BASE_URL || process.env.PUBLIC_URL || "";
-    const baseTrim = base.replace(/\/$/, "");
-    const path = `${baseTrim}${location.pathname}${location.search || ""}`;
-    return new URL(path, window.location.origin).toString();
-  };
+ const buildReturnUrl = (loc) => {
+  return new URL(`${loc.pathname}${loc.search || ""}`, window.location.origin).toString();
+};
 
   // back btn / overlay state (OUTSIDE the function)
   // const [showModal, setShowModal] = useState(false);
@@ -739,71 +751,74 @@ function Home() {
   }, []);
 
   // ====== GAME LAUNCH (ENTIRE function body stays together) ======
-  const handleGameClick = async (game) => {
-    if (!game?.provider || !game?.name || !game?.uuid) {
-      toast.error("Missing game info.");
-      return;
-    }
+ const handleGameClick = async (game) => {
+  if (!game?.provider || !game?.name || !game?.uuid) {
+    toast.error("Missing game info.");
+    return;
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      toast.error("Please login to jump into the Game World! 🎮🚀");
-      navigate("/login");
-      return;
-    }
+  const token =
+    user?.token ||
+    localStorage.getItem("token") ||
+    localStorage.getItem("access_token");
 
-    try {
-      setIsLaunchingGame(true);
+  if (!token) {
+    toast.error("Please login to jump into the Game World! 🎮🚀");
+    navigate("/login");
+    return;
+  }
 
-      const returnUrl = buildReturnUrl(location);
-      sessionStorage.setItem(RETURN_URL_KEY, returnUrl);
+  try {
+    setIsLaunchingGame(true);
 
-      const response = await axios.get(
-        `${BASE_URL}/player/${game.provider}/launch/${encodeURIComponent(
-          game.name
-        )}/${game.uuid}`,
-        {
-          params: {
-            return_url: returnUrl,
-            ...(game.has_lobby !== undefined && { has_lobby: game.has_lobby }),
-            ...(game.has_tables !== undefined && {
-              has_tables: game.has_tables,
-            }),
-          },
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+    const returnUrl = buildReturnUrl(location);
+    sessionStorage.setItem(RETURN_URL_KEY, returnUrl);
 
-      const gameUrl = response.data?.game?.gameUrl || response.data?.game_url;
-      if (gameUrl) {
-
-        sessionStorage.setItem("prevPage", location.pathname + location.search);
-
-      
-        window.history.pushState(
-          { isGameOpen: true },
-          "",
-          window.location.href
-        );
-
-        setSelectedGameUrl(gameUrl);
-        setShowFullScreenGame(true);
-      } else {
-        setIsLaunchingGame(false);
-        toast.error("Failed to get game URL.");
+    const response = await axios.get(
+      `${BASE_URL}/player/${encodeURIComponent(game.provider)}/launch/${encodeURIComponent(game.name)}/${game.uuid}`,
+      {
+        params: {
+          return_url: returnUrl,
+          ...(game.has_lobby !== undefined && { has_lobby: game.has_lobby }),
+          ...(game.has_tables !== undefined && { has_tables: game.has_tables }),
+        },
+        headers: { Authorization: `Bearer ${token}` },
       }
-    } catch (error) {
+    );
+
+    const data = response?.data;
+    const gameUrl =
+      data?.game?.gameUrl ||
+      data?.game?.game_url ||
+      data?.gameUrl ||
+      data?.game_url ||
+      data?.data?.gameUrl ||
+      data?.data?.game_url;
+
+    if (!gameUrl) {
       setIsLaunchingGame(false);
-      const errMsg = error.response?.data?.message;
-      if (errMsg === "Unauthenticated." || error.response?.status === 401) {
-        toast.error("Please login to jump into the Game World! 🎮🚀");
-        localStorage.removeItem("token");
-        setTimeout(() => navigate("/login"), 3000);
-        return;
-      }
-      toast.error("Game launch failed. Try again later.");
+      toast.error("Failed to get game URL.");
+      return;
     }
-  };
+
+    window.history.pushState({ isGameOpen: true }, "", window.location.href);
+    setSelectedGameUrl(gameUrl);
+    setShowFullScreenGame(true);
+  } catch (error) {
+    setIsLaunchingGame(false);
+
+    const errMsg = error?.response?.data?.message;
+    if (errMsg === "Unauthenticated." || error?.response?.status === 401) {
+      toast.error("Please login to jump into the Game World! 🎮🚀");
+      localStorage.removeItem("token");
+      localStorage.removeItem("access_token");
+      setTimeout(() => navigate("/login"), 800);
+      return;
+    }
+
+    toast.error(errMsg || error?.message || "Game launch failed. Try again later.");
+  }
+};
   // back btn setup Ends
 
   const Aviator = {
@@ -1029,7 +1044,7 @@ const LUCKY6_GAME = {
                       {/* home end */}
 
                       {/* HOT GAMES */}
-                      {/* HOT GAMES */}
+                       {/* HOT GAMES */}
                       <SkeletonTheme
                         baseColor="#313131"
                         highlightColor="#525252"
@@ -1588,7 +1603,7 @@ const LUCKY6_GAME = {
                                     Casino
                                   </span>
                                   <img
-                                    src="assets/img/casino.png"
+                                    src="assets/img/gamestypes/casino.png"
                                     alt=""
                                     srcSet=""
                                   />
@@ -1613,7 +1628,7 @@ const LUCKY6_GAME = {
                                     Instant
                                   </span>
                                   <img
-                                    src="assets/img/sports.png"
+                                    src="assets/img/gamestypes/instant.png"
                                     alt=""
                                     srcSet=""
                                   />
@@ -1642,7 +1657,7 @@ const LUCKY6_GAME = {
                                         Lottery
                                       </span>
                                       <img
-                                        src="assets/img/lottery.png
+                                        src="assets/img/gamestypes/lottery.png
                   "
                                         alt=""
                                         srcSet=""
@@ -1668,7 +1683,7 @@ const LUCKY6_GAME = {
                                         Slot
                                       </span>
                                       <img
-                                        src="assets/img/horse.png"
+                                        src="assets/img/gamestypes/slots.png"
                                         alt=""
                                         srcSet=""
                                       />
@@ -1691,7 +1706,7 @@ const LUCKY6_GAME = {
                                         Dice
                                       </span>
                                       <img
-                                        src="assets/img/up.png"
+                                        src="assets/img/gamestypes/dice.png"
                                         alt=""
                                         srcSet=""
                                       />
@@ -1714,7 +1729,7 @@ const LUCKY6_GAME = {
                                         Bingo
                                       </span>
                                       <img
-                                        src="assets/img/bingo.png
+                                        src="assets/img/gamestypes/bingo.png
             "
                                         alt=""
                                         srcSet=""
@@ -1802,6 +1817,7 @@ const LUCKY6_GAME = {
                           baseColor="#313131"
                           highlightColor="#525252"
                         >
+
                           {isLoadingGames ? (
                             // --- Skeleton loading state for the Swiper carousel ---
                             <swiper-container
@@ -2400,15 +2416,15 @@ const LUCKY6_GAME = {
 
                       {/*----bonus-end---*/}
 
-                      {/* {!showFullScreenGame && <BottomFooter />} */}
-                      {/* {!showFullScreenGame && <BottomProvider />} */}
+                      {!showFullScreenGame && <BottomFooter />}
+                      {!showFullScreenGame && <BottomProvider />}
 
                       {/* <BottomFooter /> */}
                     </section>
 
                     {/* Footer Start */}
 
-                    {/* <Footer /> */}
+                    <Footer />
                     {/* {!showFullScreenGame && <Footer />} */}
                     {/* Footer Start */}
 
