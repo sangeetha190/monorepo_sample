@@ -22,7 +22,7 @@ const ForgotPassword = () => {
 
       const data = await response.json();
       // console.log(data);
-
+// kj
       if (data.status === "success") {
         localStorage.setItem("forgot_mobile", values.mobile);
         setMessage(`OTP successfully sent to ${values.mobile}`);
