@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import routes from "./routes";
-
 // ✅ Lazy imports
 const Home = lazy(() => import("../pages/Home/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -16,6 +15,9 @@ const NewPassword = lazy(() => import("../pages/Auth/NewPassword"));
 const AllGamesPage = lazy(() => import("../pages/Games/AllGamesPage"));
 
 const FilteredGamesPage = lazy(() => import("../pages/Games/FilteredGamesPage"));
+const ProvidersPage = lazy(() => import("../pages/Games/ProvidersPage"));
+const HowToPlay = lazy(() => import("../pages/StaticPages/HowToPlay"));
+const TermsCondition = lazy(() => import("../pages/StaticPages/TermsCondition"));
 
 export default function AppRoutes() {
   return (
@@ -28,10 +30,11 @@ export default function AppRoutes() {
         <Route path={routes.games.all} element={<AllGamesPage />} />
         <Route path={routes.games.topGames} element={<AllGamesPage />} />
 
-        <Route
-            path={routes.games.filteredGames}
-            element={<FilteredGamesPage />}
-          />
+        <Route path={routes.games.filteredGames} element={<FilteredGamesPage />}/>
+        <Route path={routes.games.providers} element={<ProvidersPage />} />
+
+        <Route path={routes.pages.howToPlay} element={<HowToPlay />} />
+        <Route path={routes.pages.terms} element={<TermsCondition />} />
 
         {/* Auth */}
         <Route path={routes.auth.login} element={<LoginPage />} />

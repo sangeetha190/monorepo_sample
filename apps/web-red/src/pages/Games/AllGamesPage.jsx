@@ -1,7 +1,7 @@
 import Sidebar from "../Home/Components/Header/Sidebar";
 import StickyHeader from "../Home/Components/Header/Header";
 import { AllGamesView } from "@repo/frontend-core";
-// import { AllGamesView } from "@repo/frontend-core";
+import Footer from "../Home/Components/Footer/Footer";
 
 export default function AllGamesPage() {
   return (
@@ -13,7 +13,7 @@ export default function AllGamesPage() {
           <div className="content-wrapper new">
             <AllGamesView/>
             <div style={{ marginTop: "100px" }} />
-            {/* <Footer /> */}
+            <Footer />
           </div>
         </div>
       </div>

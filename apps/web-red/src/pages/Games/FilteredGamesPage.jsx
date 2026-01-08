@@ -24,6 +24,7 @@ import {
   keepPreviousData,
   useQueryClient,
 } from "@tanstack/react-query";
+import Footer from "../Home/Components/Footer/Footer";
 
 
 const FilteredGamesPage = () => {
@@ -719,7 +720,7 @@ const FilteredGamesPage = () => {
               </div>
             )}
             <div style={{ marginTop: "100px" }} />
-            {/* <Footer /> */}
+            <Footer />
           </div>
         </div>
       </div>

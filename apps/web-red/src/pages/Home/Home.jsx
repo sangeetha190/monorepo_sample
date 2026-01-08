@@ -18,19 +18,8 @@ import {
 } from "@core/hooks/homePageApi";
 
 
-// import axiosInstance from "../api/axiosConfig";
-
-
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
-
-
-
-// import AuthContext from "../../Auth/AuthContext";
-// import FullPageLoader from "./FullPageLoader";
-// import axiosInstance from "../../API/axiosConfig";
-
-// import { Images } from "./Header/constants/images";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -1171,7 +1160,6 @@ const LUCKY6_GAME = {
                                   height: "100vh",
                                   backgroundColor: "#000",
                                   zIndex: 9999,
-                                  height: "100dvh",
                                 }}
                               >
                                 {/* Navbar only appears if iframe loaded successfully */}
