@@ -1,5 +1,5 @@
 {
-  "name": "web-green",
+  "name": "web-blue",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,11 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@repo/frontend-core": "workspace:*",
+    "@repo/theme-tokens": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@tanstack/react-query": "^5.90.12",
+    "formik": "^2.4.9",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@repo/frontend-core": "workspace:*",
-    "@repo/ui": "workspace:*",
-    "@repo/theme-tokens": "workspace:*"
+    "react-loading-skeleton": "^3.5.0",
+    "react-router-dom": "^7.11.0",
+    "react-toastify": "^11.0.5",
+    "swiper": "^12.0.3",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
