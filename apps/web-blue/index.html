@@ -2,12 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>web-blue</title>
+
+    <title>webwise</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/red_icon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/swiper.css" />
+
+    <!-- Icon Fonts -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+      rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+
+    <!-- Material Design Icons -->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.4.47/css/materialdesignicons.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+
+    <!-- Flaticon Additional Sets -->
+    <link rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css">
+    <link rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-bold-straight/css/uicons-bold-straight.css">
+    <link rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-solid/css/uicons-regular-solid.css">
+
+    <!-- Google Analytics -->
+    <script async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z11YYG31PG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z11YYG31PG');
+    </script>
+
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){
+          n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+        };
+        if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];
+        t=b.createElement(e);t.async=!0;
+        t.src=v;
+        s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+      fbq('init', '1584345842546983');
+      fbq('track', 'PageView');
+    </script>
+
   </head>
+
   <body>
+
     <div id="root"></div>
+
+    <!-- Facebook Pixel noscript (moved to body!) -->
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1584345842546983&ev=PageView&noscript=1" />
+    </noscript>
+
+    <!-- Vite Entry -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Local JS -->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/swiper.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Your custom scripts (offcanvas, toggle, copy, etc.) -->
+    <script>
+      // Your existing JS here...
+    </script>
+
+    <!-- StatCounter -->
+    <script>
+      var sc_project = 13175866;
+      var sc_invisible = 1;
+      var sc_security = "27d7f4b2";
+    </script>
+    <script src="https://www.statcounter.com/counter/counter.js" async></script>
+
+    <noscript>
+      <div class="statcounter">
+        <a href="https://statcounter.com/" target="_blank">
+          <img class="statcounter"
+            src="https://c.statcounter.com/13175866/0/27d7f4b2/1/"
+            alt="Web Analytics"
+            referrerPolicy="no-referrer-when-downgrade">
+        </a>
+      </div>
+    </noscript>
+
   </body>
 </html>
