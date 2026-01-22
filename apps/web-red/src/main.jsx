@@ -6,7 +6,7 @@ import "@repo/frontend-core/bootstrap"; // or "@core/bootstrap" if exports not s
 import "./index.css";
 import "swiper/css";
 import App from "./App.jsx";
-
+// import "bootstrap/dist/css/bootstrap.min.css";
 // ✅ React Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
